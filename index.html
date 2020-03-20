@@ -13,7 +13,7 @@
     <h3 class="col-4">Students Average<span class="badge badge-secondary" id="updateAverages"></span></h3>
   </header>
   <main class ="row">
-    <table class="table" id="table">
+    <table class="table col-8" id="table">
       <thead class="thead-dark">
         <tr>
           <th scope="col">Student's Name</th>
@@ -23,6 +23,24 @@
       </thead>
       <tbody></tbody>
     </table>
+    <div class="col-4">
+      <form action="post">
+        <label>
+          Student's Name
+          <input type="text" name="name" id="studentName">
+        </label>
+        <label>
+          Course
+          <input type="text" name="course" id="studentCourse">
+        </label>
+        <label>
+          Grade
+          <input type="text" name="grade" id="studentGrade">
+        </label>
+        <button type="submit">Add</button>
+        <button type="reset">Cancel</button>
+      </form>
+    </div>
   </main>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
   <script src="components/app.js"></script>
