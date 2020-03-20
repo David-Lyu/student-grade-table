@@ -4,6 +4,6 @@ class PageHeader {
   }
 
   updateAverage(newAverage) {
-    console.loh(newAverage);
+    this.headerElement.textContent = newAverage;
   }
 }
