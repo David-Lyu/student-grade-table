@@ -11,7 +11,7 @@
     <h1>Student Grade Table</h1>
   </header>
   <main>
-    <table class="table">
+    <table class="table" id="table">
       <thead class="thead-dark">
         <tr>
           <th scope="col">Student's Name</th>
@@ -19,27 +19,12 @@
           <th scope="col">Grade</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>Tim Berners-Lee</td>
-          <td>Web Development</td>
-          <td>100</td>
-        </tr>
-        <tr>
-          <td>Scott Bowler</td>
-          <td>Web Development</td>
-          <td>100</td>
-        </tr>
-        <tr>
-          <td>Tim Davis</td>
-          <td>Web Development</td>
-          <td>50</td>
-        </tr>
-      </tbody>
+      <tbody></tbody>
     </table>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
     <script src="components/app.js"></script>
+    <script src="components/grade-table.js"></script>
     <script src="main.js"></script>
   </main>
 </body>
