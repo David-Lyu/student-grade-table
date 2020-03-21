@@ -10,7 +10,7 @@
 <body class="container">
   <header class="row">
     <h1 class="col-8">Student Grade Table</h1>
-    <h3 class="col-4">Students Average<span class="badge badge-secondary" id="updateAverages"></span></h3>
+    <h3 class="col-4">Students Average: <span class="badge badge-secondary" id="updateAverages"></span></h3>
   </header>
   <main class ="row">
     <table class="table col-8" id="table">
@@ -23,7 +23,7 @@
       </thead>
       <tbody></tbody>
     </table>
-
+    <p class="d-none">No Grades Recorded</p>
     <aside class="col-4">
       <form method="post" action="https://sgt.lfzprototypes.com/api/grades">
         <label class="form-group row">
@@ -70,12 +70,12 @@
               </svg>
             </div>
           </div>
-          <input type="number" name="grade" class="col-sm-10 form-control" id="studentGrade" placeholder="Grade">
+          <input type="number" name="grade" class="col-sm-10 form-control" id="studentGrade" placeholder="Grade" min="0" max="100">
         </label>
 
         <div class="form-group row">
           <button type="submit" class="offset-sm-5 col-sm-3 btn btn-success">Add</button>
-          <button type="reset" class="offset-sm-1 col-sm-3 btn btn-danger">Cancel</button>
+          <button type="reset" class="offset-sm-1 col-sm-3 btn btn-outline-secondary">Cancel</button>
         </div>
       </form>
     </aside>
