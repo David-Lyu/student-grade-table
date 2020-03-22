@@ -32,17 +32,26 @@ class GradeTable {
   onDeleteClick(deleteGrade) {
     this.deleteGrade = deleteGrade;
   }
-  renderGradeRow(data,trElement,deleteGrade){
+  renderGradeRow(data,trElement,deleteGrade,editGrade){
     this.single = data;
     var td4Element = document.createElement("td");
-    var tdDeleteButton = document.createElement("button");
-    tdDeleteButton.classList.add("btn", "btn-danger");
-    tdDeleteButton.textContent = "DELETE";
-    td4Element.appendChild(tdDeleteButton);
+    var iconDeleteButton = document.createElement("i");
+    var iconEditButton = document.createElement("i");
+    iconEditButton.classList.add("btn", "btn-warning", "far","fa-edit");
+    iconDeleteButton.classList.add("btn", "btn-danger","far","fa-trash-alt");
+    td4Element.appendChild(iconEditButton);
+    td4Element.appendChild(iconDeleteButton);
     trElement.appendChild(td4Element)
-    tdDeleteButton.addEventListener("click",function(){
+    iconEditButton.addEventListener("click",function() {
+      editGrade(data.id)
+    })
+    iconDeleteButton.addEventListener("click",function(){
       deleteGrade(data.id)
     })
     return td4Element;
+  }
+
+  onEditClick(editGrade) {
+    this.EditGrade = editGrade;
   }
 }

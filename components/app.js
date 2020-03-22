@@ -12,7 +12,8 @@ class App {
     this.boundDeleteGrade = this.deleteGrade.bind(this);
     this.bindHandleDeleteGradeSuccess = this.handleDeleteGradeSuccess.bind(this);
     this.bindHandleDeleteGradeError = this.handleDeleteGradeError.bind(this);
-    this.boundCacheGrade = this.cacheGrade.bind(this)
+    this.boundEditGrade = this.editGrade.bind(this);
+    // this.boundCacheGrade = this.cacheGrade.bind(this)
   }
 
   handleGetGradesError(error) {
@@ -98,13 +99,36 @@ class App {
     console.error(error);
   }
 
-  handleDeleteGradeSuccess(){
+  handleDeleteGradeSuccess() {
     this.getGrades();
   }
 
-  editGrade(id) {
-    console.log(id);
+  handleEditGradeError(error) {
+    console.error(error);
   }
+
+  handleEditGradeSuccess() {
+    this.getGrades();
+  }
+  editGrade(id,name,course,grade) {
+    console.log(id);
+    // $.ajax(
+    //   {
+    //     headers: {
+    //       "X-Access-Token": "PPW7pOdc"
+    //     },
+    //     method: "PATCH",
+    //     data: {
+    //       "name": name,
+    //       "course": course,
+    //       "grade": grade
+    //     },
+    //     success: console.log("GOOD"),
+    //     error: console.log("bad")
+    //   }
+    // )
+  }
+
   // cacheGrade(grade) {
   //   var cacheGrade = [];
   //   for(var storeGradeIndex = 0; storeGradeIndex < grade.length; storeGradeIndex++) {
