@@ -4,6 +4,10 @@ class PageHeader {
   }
 
   updateAverage(newAverage) {
+    if(newAverage) {
     this.headerElement.textContent = newAverage;
+    }else {
+      this.headerElement.textContent = 0;
+    }
   }
 }
