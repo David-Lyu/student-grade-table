@@ -78,7 +78,6 @@ class App {
   }
 
   deleteGrade(id,grade) {
-    console.log(id)
     $.ajax(
       {
         headers: {
