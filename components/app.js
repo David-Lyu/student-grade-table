@@ -102,6 +102,9 @@ class App {
     this.getGrades();
   }
 
+  editGrade(id) {
+    console.log(id);
+  }
   // cacheGrade(grade) {
   //   var cacheGrade = [];
   //   for(var storeGradeIndex = 0; storeGradeIndex < grade.length; storeGradeIndex++) {
