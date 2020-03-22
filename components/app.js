@@ -12,6 +12,7 @@ class App {
     this.boundDeleteGrade = this.deleteGrade.bind(this);
     this.bindHandleDeleteGradeSuccess = this.handleDeleteGradeSuccess.bind(this);
     this.bindHandleDeleteGradeError = this.handleDeleteGradeError.bind(this);
+    this.boundCacheGrade = this.cacheGrade.bind(this)
   }
 
   handleGetGradesError(error) {
@@ -77,7 +78,7 @@ class App {
     this.gradeTable.onDeleteClick(this.boundDeleteGrade)
   }
 
-  deleteGrade(id,grade) {
+  deleteGrade(id) {
     console.log(id)
     $.ajax(
       {
@@ -100,4 +101,12 @@ class App {
   handleDeleteGradeSuccess(){
     this.getGrades();
   }
+
+  // cacheGrade(grade) {
+  //   var cacheGrade = [];
+  //   for(var storeGradeIndex = 0; storeGradeIndex < grade.length; storeGradeIndex++) {
+  //     cacheGrade[storeGradeIndex] = grade[cacheGrade];
+  //   }
+  //   console.log("cacheGrade")
+  // } For Improve Network Efficiency
 }
