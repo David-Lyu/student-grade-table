@@ -42,9 +42,9 @@ class GradeTable {
     td4Element.appendChild(iconEditButton);
     td4Element.appendChild(iconDeleteButton);
     trElement.appendChild(td4Element)
-    iconEditButton.addEventListener("click",function() {
-      editGrade(data.id)
-    })
+    // iconEditButton.addEventListener("click",function() {
+    //   editGrade()
+    // })should pass grade id
     iconDeleteButton.addEventListener("click",function(){
       deleteGrade(data.id)
     })

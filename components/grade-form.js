@@ -14,6 +14,7 @@ class GradeForm {
     this.formName = this.formData.get("name")
     this.formCourse = this.formData.get("course")
     this.formGrade = this.formData.get("grade")
+    // if(formElement === )check to see action
     this.createGrade(this.formName,this.formCourse,this.formGrade)
     event.target.reset();
   }
