@@ -13,6 +13,8 @@ class App {
     this.bindHandleDeleteGradeSuccess = this.handleDeleteGradeSuccess.bind(this);
     this.bindHandleDeleteGradeError = this.handleDeleteGradeError.bind(this);
     this.boundEditGrade = this.editGrade.bind(this);
+    this.bindHandleEditGradeSuccess = this.handleEditGradeSuccess.bind(this);
+    this.bindHandleEditGradeError = this.handleDeleteGradeError.bind(this);
     // this.boundCacheGrade = this.cacheGrade.bind(this)
   }
 
@@ -22,6 +24,7 @@ class App {
 
   handleGetGradesSuccess(grades) {
     this.gradeTable.updateGrades(grades)
+    this.gradeForm.onSubmit(this.boundCreateGrades,this.boundEditGrade,this.gradeTable)
     var averages = 0;
     for(var averageIndex = 0; averageIndex < grades.length; averageIndex++) {
       averages += grades[averageIndex].grade
@@ -76,11 +79,10 @@ class App {
   start() {
     this.getGrades();
     this.gradeForm.onSubmit(this.boundCreateGrades)
-    this.gradeTable.onDeleteClick(this.boundDeleteGrade)
+    this.gradeTable.onOperationClick(this.boundDeleteGrade)
   }
 
   deleteGrade(id) {
-    console.log(id)
     $.ajax(
       {
         headers: {
@@ -103,30 +105,32 @@ class App {
     this.getGrades();
   }
 
+  editGrade(id, name, course, grade) {
+    console.log(id, name, course, grade);
+    $.ajax(
+      {
+        headers: {
+          "X-Access-Token": "PPW7pOdc"
+        },
+        method: "PATCH",
+        url: "https://sgt.lfzprototypes.com/api/grades/" + id,
+        data: {
+          "name": name,
+          "course": course,
+          "grade": grade
+        },
+        success: this.bindHandleEditGradeSuccess,
+        error: this.bindHandleEditGradeError
+      }
+    )
+  }
+
   handleEditGradeError(error) {
     console.error(error);
   }
 
   handleEditGradeSuccess() {
     this.getGrades();
-  }
-  editGrade(id,name,course,grade) {
-    console.log(id);
-    // $.ajax(
-    //   {
-    //     headers: {
-    //       "X-Access-Token": "PPW7pOdc"
-    //     },
-    //     method: "PATCH",
-    //     data: {
-    //       "name": name,
-    //       "course": course,
-    //       "grade": grade
-    //     },
-    //     success: console.log("GOOD"),
-    //     error: console.log("bad")
-    //   }
-    // )
   }
 
   // cacheGrade(grade) {

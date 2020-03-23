@@ -1,7 +1,13 @@
 class GradeTable {
-  constructor(tableElement,noGradesElement) {
+  constructor(tableElement,noGradesElement,formElement,aside) {
     this.tableElement = tableElement;
     this.noGradesElement = noGradesElement;
+    this.formElement = formElement;
+    this.aside = aside;
+    this.button = this.formElement.querySelectorAll("button");
+    this.asideHeading = this.aside.querySelectorAll("h3");
+    this.onEditClick = this.onEditClick.bind(this);
+    this.boundOnOperationClick = this.onOperationClick.bind(this);
   }
   updateGrades(grades,renderGradeRow) {
     var tbodyElement = this.tableElement.querySelector("tbody");
@@ -21,7 +27,7 @@ class GradeTable {
         var td3Element = document.createElement("td");
         td3Element.textContent = grades[gradesIndex].grade;
         trElement.appendChild(td3Element);
-        this.renderGradeRow(grades[gradesIndex],trElement,this.deleteGrade);
+        this.renderGradeRow(grades[gradesIndex],trElement,this.deleteGrade,this.editGrades,this.onEditClick);
         tbodyElement.appendChild(trElement)
 
         }
@@ -29,29 +35,32 @@ class GradeTable {
         pElement.classList.remove("d-none")
       }
   }
-  onDeleteClick(deleteGrade) {
+  onOperationClick(deleteGrade,editGrades) {
     this.deleteGrade = deleteGrade;
+    this.editGrades = editGrades;
   }
-  renderGradeRow(data,trElement,deleteGrade,editGrade){
+  renderGradeRow(data,trElement,deleteGrade,editGrades,onEditClick){
     this.single = data;
-    var td4Element = document.createElement("td");
-    var iconDeleteButton = document.createElement("i");
-    var iconEditButton = document.createElement("i");
-    iconEditButton.classList.add("btn", "btn-warning", "far","fa-edit");
-    iconDeleteButton.classList.add("btn", "btn-danger","far","fa-trash-alt");
-    td4Element.appendChild(iconEditButton);
-    td4Element.appendChild(iconDeleteButton);
-    trElement.appendChild(td4Element)
-    // iconEditButton.addEventListener("click",function() {
-    //   editGrade()
-    // })should pass grade id
-    iconDeleteButton.addEventListener("click",function(){
+    this.td4Element = document.createElement("td");
+    this.iconDeleteButton = document.createElement("i");
+    this.iconEditButton = document.createElement("i");
+    this.iconEditButton.classList.add("btn", "btn-warning", "far","fa-edit");
+    this.iconDeleteButton.classList.add("btn", "btn-danger","far","fa-trash-alt");
+    this.td4Element.appendChild(this.iconEditButton);
+    this.td4Element.appendChild(this.iconDeleteButton);
+    trElement.appendChild(this.td4Element)
+    this.iconEditButton.addEventListener("click",function(){
+      onEditClick(data)});
+    this.iconDeleteButton.addEventListener("click",function(){
       deleteGrade(data.id)
     })
-    return td4Element;
   }
 
-  onEditClick(editGrade) {
-    this.EditGrade = editGrade;
+  onEditClick(data) {
+    this.id = data.id
+    this.button[0].classList.add("d-none");
+    this.button[1].classList.remove("d-none");
+    this.asideHeading[0].classList.add("d-none");
+    this.asideHeading[1].classList.remove("d-none");
   }
 }
