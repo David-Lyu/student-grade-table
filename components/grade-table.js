@@ -17,6 +17,7 @@ class GradeTable {
       if(grades.length != 0) {
         pElement.classList.add("d-none")
         for (var gradesIndex = 0; gradesIndex < grades.length; gradesIndex++) {
+        grades[gradesIndex].value = gradesIndex;
         var trElement = document.createElement("tr");
         var td1Element = document.createElement("td");
         trElement.appendChild(td1Element);
@@ -57,7 +58,7 @@ class GradeTable {
   }
 
   onEditClick(data) {
-    this.id = data.id
+    this.data = data;
     this.button[0].classList.add("d-none");
     this.button[1].classList.remove("d-none");
     this.asideHeading[0].classList.add("d-none");

@@ -25,7 +25,7 @@ class App {
   handleGetGradesSuccess(grades) {
     this.cacheGrade(grades);
     this.gradeTable.updateGrades(this.cacheGradeArray);
-    this.gradeForm.onSubmit(this.cacheGradeArray,this.boundEditGrade,this.gradeTable)
+    this.gradeForm.onSubmit(this.cacheGradeArray,this.gradeTable,this.cacheGradeEdit,this.cacheGradeAdd)
     var averages = 0;
     for(var averageIndex = 0; averageIndex < grades.length; averageIndex++) {
       averages += grades[averageIndex].grade

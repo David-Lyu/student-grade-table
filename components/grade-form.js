@@ -10,11 +10,12 @@ class GradeForm {
     this.formElement.addEventListener("submit",this.boundHandleSubmit);
     this.buttonFromFormEle[2].addEventListener("click",this.boundHandleCancel)
   }
-  onSubmit(createGrade,editGrade,gradeTable) {
+  onSubmit(createGrade,gradeTable,editArray,addGradeToServer) {
     this.createGrade = createGrade;
     this.addGradeToServer = [];
-    this.editGrade = editGrade;
     this.gradeTable = gradeTable;
+    this.cacheEditArray = editArray;
+    this.cacheGradeAdd = addGradeToServer;
   }
 
   handleSubmit(event) {
@@ -29,7 +30,17 @@ class GradeForm {
       this.createGrade.push(this.addingObj)
       this.gradeTable.updateGrades(this.createGrade)
     } else {
-      this.editGrade(this.gradeTable.id,this.formName,this.formCourse,this.formGrade)
+      this.gradeTable.data.name = name;
+      this.gradeTable.data.course = course;
+      this.gradeTable.data.grade = grade;
+      this.gradeTable.updateGrades(this.createGrade)
+      var newObj = { id: this.gradeTable.data.id,name, course, grade}
+      if(this.gradeTable.data.id) {
+        this.cacheEditArray.push(newObj);
+      }else {
+        this.cacheGradeAdd.push(newObj)
+      }
+      console.log(this.cacheEditArray,this.cacheGradeAdd,)
       this.buttonFromFormEle[0].classList.remove("d-none");
       this.buttonFromFormEle[1].classList.add("d-none");
       this.asideElementHeading[0].classList.remove("d-none");
