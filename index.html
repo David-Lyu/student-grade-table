@@ -6,11 +6,12 @@
   <title>SGT Add Grades</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+  <link rel="stylesheet" href="mediaqueries.css">
 </head>
 <body class="container">
   <header class="row">
     <h1 class="col-8">Student Grade Table</h1>
-    <h3 class="col-4">Students Average: <span class="badge badge-secondary" id="updateAverages"></span></h3>
+    <h3 class="col-4">Students Average: <span class="text-center badge badge-secondary" id="updateAverages"></span></h3>
   </header>
   <main class ="row">
     <table class="table col-8" id="table">
@@ -30,7 +31,7 @@
     <aside class="col-4">
       <h3>Add Student</h3>
       <h3 class="d-none">Edit Student</h3>
-      <form>
+      <form class="mx-auto">
         <label class="form-group row">
           <div class="input-group mb-3 col-2">
             <div class="input-group-prepend">
