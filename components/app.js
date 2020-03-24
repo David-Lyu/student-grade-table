@@ -29,7 +29,7 @@ class App {
     for(var averageIndex = 0; averageIndex < grades.length; averageIndex++) {
       averages += grades[averageIndex].grade
     }
-    averages = averages/grades.length;
+    averages = Math.round(averages/grades.length);
     this.pageHeader.updateAverage(averages);
   }
 
