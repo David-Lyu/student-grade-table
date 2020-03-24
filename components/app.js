@@ -15,7 +15,7 @@ class App {
     this.boundEditGrade = this.editGrade.bind(this);
     this.bindHandleEditGradeSuccess = this.handleEditGradeSuccess.bind(this);
     this.bindHandleEditGradeError = this.handleDeleteGradeError.bind(this);
-    // this.boundCacheGrade = this.cacheGrade.bind(this)
+    this.boundCacheGrade = this.cacheGrade.bind(this)
   }
 
   handleGetGradesError(error) {
@@ -23,8 +23,9 @@ class App {
   }
 
   handleGetGradesSuccess(grades) {
-    this.gradeTable.updateGrades(grades)
-    this.gradeForm.onSubmit(this.boundCreateGrades,this.boundEditGrade,this.gradeTable)
+    this.cacheGrade(grades);
+    this.gradeTable.updateGrades(this.cacheGradeArray);
+    this.gradeForm.onSubmit(this.cacheGradeArray,this.boundEditGrade,this.gradeTable)
     var averages = 0;
     for(var averageIndex = 0; averageIndex < grades.length; averageIndex++) {
       averages += grades[averageIndex].grade
@@ -133,11 +134,13 @@ class App {
     this.getGrades();
   }
 
-  // cacheGrade(grade) {
-  //   var cacheGrade = [];
-  //   for(var storeGradeIndex = 0; storeGradeIndex < grade.length; storeGradeIndex++) {
-  //     cacheGrade[storeGradeIndex] = grade[cacheGrade];
-  //   }
-  //   console.log("cacheGrade")
-  // } For Improve Network Efficiency
+  cacheGrade(grade) {
+    this.cacheGradeArray = [];
+    for(var storeGradeIndex = 0; storeGradeIndex < grade.length; storeGradeIndex++) {
+      this.cacheGradeArray[storeGradeIndex] = grade[storeGradeIndex];
+    }
+    this.cacheGradeAdd = [];
+    this.cacheGradeDelete = [];
+    this.cacheGradeEdit = [];
+  }
 }

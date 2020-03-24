@@ -9,7 +9,7 @@ class GradeTable {
     this.onEditClick = this.onEditClick.bind(this);
     this.boundOnOperationClick = this.onOperationClick.bind(this);
   }
-  updateGrades(grades,renderGradeRow) {
+  updateGrades(grades) {
     var tbodyElement = this.tableElement.querySelector("tbody");
     tbodyElement.innerHTML = "";
     var pElement = document.querySelector("p");
