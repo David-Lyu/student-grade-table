@@ -10,12 +10,12 @@ class GradeTable {
     this.updateGrades = this.updateGrades.bind(this)
   }
   updateGrades(grades,deleteGradeArray) {
-    var tbodyElement = this.tableElement.querySelector("tbody");
-    tbodyElement.innerHTML = "";
-    var pElement = document.querySelector("p");
-    var td4Element;
+    this.tbodyElement = this.tableElement.querySelector("tbody");
+    this.tbodyElement.innerHTML = "";
+    this.pElement = document.querySelector("p");
+    this.td4Element;
       if(grades.length != 0) {
-        pElement.classList.add("d-none")
+        this.pElement.classList.add("d-none")
         for (var gradesIndex = 0; gradesIndex < grades.length; gradesIndex++) {
         grades[gradesIndex].value = gradesIndex;
         var trElement = document.createElement("tr");
@@ -29,16 +29,17 @@ class GradeTable {
         td3Element.textContent = grades[gradesIndex].grade;
         trElement.appendChild(td3Element);
         this.renderGradeRow(grades[gradesIndex],trElement,deleteGradeArray,this.onEditClick,grades,this.updateGrades);
-        tbodyElement.appendChild(trElement)
+        this.tbodyElement.appendChild(trElement)
 
         }
       }else {
-        pElement.classList.remove("d-none")
+        this.pElement.classList.remove("d-none")
       }
   }
 
   renderGradeRow(data,trElement,deleteGradeArray,onEditClick,grades,updateGrades){
     this.single = data;
+    this.deleteGradeArray = deleteGradeArray
     this.td4Element = document.createElement("td");
     this.iconDeleteButton = document.createElement("i");
     this.iconEditButton = document.createElement("i");
@@ -53,11 +54,10 @@ class GradeTable {
       if(data.id){
         deleteGradeArray.push(data);
         grades.splice(data.value,1)
-        updateGrades(grades)
-        console.log(data, data.value, deleteGradeArray, grades)
+        updateGrades(grades,deleteGradeArray)
       }else {
         grades.splice(data.value,1)
-        updateGrades(grades)
+        updateGrades(grades,deleteGradeArray)
       }
     })
   }

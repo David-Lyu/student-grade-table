@@ -12,7 +12,6 @@ class GradeForm {
   }
   onSubmit(createGrade,gradeTable,editArray,addGradeToServer) {
     this.createGrade = createGrade;
-    this.addGradeToServer = [];
     this.gradeTable = gradeTable;
     this.cacheEditArray = editArray;
     this.cacheGradeAdd = addGradeToServer;
@@ -26,7 +25,7 @@ class GradeForm {
     var grade = this.formData.get("grade")
     if(!this.buttonFromFormEle[0].classList.contains("d-none")) {
       this.addingObj = {name,course,grade}
-      this.addGradeToServer.push(this.addingObj)
+      this.cacheGradeAdd.push(this.addingObj)
       this.createGrade.push(this.addingObj)
       this.gradeTable.updateGrades(this.createGrade)
     } else {
@@ -37,8 +36,6 @@ class GradeForm {
       var newObj = { id: this.gradeTable.data.id,name, course, grade}
       if(this.gradeTable.data.id) {
         this.cacheEditArray.push(newObj);
-      }else {
-        this.cacheGradeAdd.push(newObj)
       }
       this.buttonFromFormEle[0].classList.remove("d-none");
       this.buttonFromFormEle[1].classList.add("d-none");

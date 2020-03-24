@@ -79,7 +79,6 @@ class App {
 
   start() {
     this.getGrades();
-    this.gradeForm.onSubmit(this.boundCreateGrades)
   }
 
   deleteGrade(id) {
@@ -140,5 +139,11 @@ class App {
     this.cacheGradeAdd = [];
     this.cacheGradeDelete = [];
     this.cacheGradeEdit = [];
+  }
+
+  callOnServer() {
+    for(var indexAddToServer = 0; indexAddToServer < this.cacheGradeAdd.length; indexAddToServer++){
+      this.a
+    }
   }
 }
