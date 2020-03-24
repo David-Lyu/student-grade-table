@@ -1,11 +1,13 @@
 class App {
 
-  constructor(gradeTable,pageHeader,gradeForm) {
+  constructor(gradeTable,pageHeader,gradeForm,formElement) {
     this.bindHandleGetGradesError = this.handleGetGradesError.bind(this);
     this.bindHandleGetGradesSuccess = this.handleGetGradesSuccess.bind(this);
     this.gradeTable = gradeTable;
     this.pageHeader = pageHeader;
     this.gradeForm = gradeForm;
+    this.formElement = formElement;
+    this.buttonSave = formElement.querySelector("button")
     this.boundCreateGrades = this.createGrade.bind(this);
     this.bindHandleCreateGradesError = this.handleCreateGradeError.bind(this);
     this.bindHandleCreateGradesSuccess = this.handleCreateGradeSuccess.bind(this);
@@ -25,13 +27,15 @@ class App {
   handleGetGradesSuccess(grades) {
     this.cacheGrade(grades);
     this.gradeTable.updateGrades(this.cacheGradeArray,this.cacheGradeDelete);
-    this.gradeForm.onSubmit(this.cacheGradeArray,this.gradeTable,this.cacheGradeEdit,this.cacheGradeAdd)
+    this.gradeForm.onSubmit(this.cacheGradeArray,this.gradeTable,this.cacheGradeEdit,this.cacheGradeAdd,this.cacheGradeDelete)
     var averages = 0;
     for(var averageIndex = 0; averageIndex < grades.length; averageIndex++) {
       averages += grades[averageIndex].grade
     }
     averages = Math.round(averages/grades.length);
     this.pageHeader.updateAverage(averages);
+    this.buttonSave.addEventListener("click",this.callOnServer)
+
   }
 
   getGrades() {
@@ -74,7 +78,7 @@ class App {
   }
 
   handleCreateGradeSuccess(){
-    this.getGrades();
+    console.log("added data has been saved")
   }
 
   start() {
@@ -101,7 +105,7 @@ class App {
   }
 
   handleDeleteGradeSuccess() {
-    this.getGrades();
+    console.log("deleted data has been saved")
   }
 
   editGrade(id, name, course, grade) {
@@ -128,7 +132,7 @@ class App {
   }
 
   handleEditGradeSuccess() {
-    this.getGrades();
+    console.log("edited data has been saved")
   }
 
   cacheGrade(grade) {
@@ -142,8 +146,26 @@ class App {
   }
 
   callOnServer() {
-    for(var indexAddToServer = 0; indexAddToServer < this.cacheGradeAdd.length; indexAddToServer++){
-      this.a
+    if(this.cacheGradeAdd.length > 0) {
+      var addTemp;
+      for(var putInServerIndex = 0; putInServerIndex < this.cacheGradeAdd.length; putInServerIndex++){
+        addTemp = this.cacheGradeAdd[putInServerIndex]
+        this.createGrade(addTemp.name, addTemp.course, addTemp.grade)
+      }
+    }
+    if(this.cacheGradeDelete.length > 0) {
+      var deleteTemp;
+      for(var deleteInServerIndex = 0; deleteInServerIndex < this.cacheGradeDelete.length; deleteInServerIndex++) {
+        deleteTemp = this.cacheGradeDelete[deleteInServerIndex]
+        this.deleteGrade(deleteTemp.id)
+      }
+    }
+    if(this.cacheGradeEdit.length > 0) {
+      var editTemp;
+      for(var editInServerIndex = 0; editInServerIndex < this.cacheGradeEdit.length; editInServerIndex++) {
+        editTemp = this.cacheGradeEdit[editInServerIndex];
+        this.editGrade(editTemp.id,editTemp.name,editTemp.course,editTemp.grade)
+      }
     }
   }
 }

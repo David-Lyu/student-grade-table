@@ -6,5 +6,5 @@ var asideElement = document.querySelector("aside");
 var gradeForm = new GradeForm(formElement,asideElement);
 var gradeTable = new GradeTable(tableElement,pElement,formElement,asideElement);
 var pageHeader = new PageHeader(headerAverages)
-var viewGrades = new App(gradeTable,pageHeader,gradeForm);
+var viewGrades = new App(gradeTable,pageHeader,gradeForm,formElement);
 viewGrades.start();

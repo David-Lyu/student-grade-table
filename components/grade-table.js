@@ -36,6 +36,9 @@ class GradeTable {
         this.pElement.classList.remove("d-none")
       }
   }
+  onOperationClick(deleteGradeArray) {
+    this.deleteGradeArray = deleteGradeArray;
+  }
 
   renderGradeRow(data,trElement,deleteGradeArray,onEditClick,grades,updateGrades){
     this.single = data;
@@ -64,8 +67,8 @@ class GradeTable {
 
   onEditClick(data) {
     this.data = data;
-    this.button[0].classList.add("d-none");
-    this.button[1].classList.remove("d-none");
+    this.button[1].classList.add("d-none");
+    this.button[2].classList.remove("d-none");
     this.asideHeading[0].classList.add("d-none");
     this.asideHeading[1].classList.remove("d-none");
   }
