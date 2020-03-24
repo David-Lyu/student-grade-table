@@ -24,7 +24,7 @@ class App {
 
   handleGetGradesSuccess(grades) {
     this.cacheGrade(grades);
-    this.gradeTable.updateGrades(this.cacheGradeArray);
+    this.gradeTable.updateGrades(this.cacheGradeArray,this.cacheGradeDelete);
     this.gradeForm.onSubmit(this.cacheGradeArray,this.gradeTable,this.cacheGradeEdit,this.cacheGradeAdd)
     var averages = 0;
     for(var averageIndex = 0; averageIndex < grades.length; averageIndex++) {
@@ -80,7 +80,6 @@ class App {
   start() {
     this.getGrades();
     this.gradeForm.onSubmit(this.boundCreateGrades)
-    this.gradeTable.onOperationClick(this.boundDeleteGrade)
   }
 
   deleteGrade(id) {
@@ -107,7 +106,6 @@ class App {
   }
 
   editGrade(id, name, course, grade) {
-    console.log(id, name, course, grade);
     $.ajax(
       {
         headers: {

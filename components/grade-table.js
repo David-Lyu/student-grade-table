@@ -7,9 +7,9 @@ class GradeTable {
     this.button = this.formElement.querySelectorAll("button");
     this.asideHeading = this.aside.querySelectorAll("h3");
     this.onEditClick = this.onEditClick.bind(this);
-    this.boundOnOperationClick = this.onOperationClick.bind(this);
+    this.updateGrades = this.updateGrades.bind(this)
   }
-  updateGrades(grades) {
+  updateGrades(grades,deleteGradeArray) {
     var tbodyElement = this.tableElement.querySelector("tbody");
     tbodyElement.innerHTML = "";
     var pElement = document.querySelector("p");
@@ -28,7 +28,7 @@ class GradeTable {
         var td3Element = document.createElement("td");
         td3Element.textContent = grades[gradesIndex].grade;
         trElement.appendChild(td3Element);
-        this.renderGradeRow(grades[gradesIndex],trElement,this.deleteGrade,this.editGrades,this.onEditClick);
+        this.renderGradeRow(grades[gradesIndex],trElement,deleteGradeArray,this.onEditClick,grades,this.updateGrades);
         tbodyElement.appendChild(trElement)
 
         }
@@ -36,11 +36,8 @@ class GradeTable {
         pElement.classList.remove("d-none")
       }
   }
-  onOperationClick(deleteGrade,editGrades) {
-    this.deleteGrade = deleteGrade;
-    this.editGrades = editGrades;
-  }
-  renderGradeRow(data,trElement,deleteGrade,editGrades,onEditClick){
+
+  renderGradeRow(data,trElement,deleteGradeArray,onEditClick,grades,updateGrades){
     this.single = data;
     this.td4Element = document.createElement("td");
     this.iconDeleteButton = document.createElement("i");
@@ -53,7 +50,15 @@ class GradeTable {
     this.iconEditButton.addEventListener("click",function(){
       onEditClick(data)});
     this.iconDeleteButton.addEventListener("click",function(){
-      deleteGrade(data.id)
+      if(data.id){
+        deleteGradeArray.push(data);
+        grades.splice(data.value,1)
+        updateGrades(grades)
+        console.log(data, data.value, deleteGradeArray, grades)
+      }else {
+        grades.splice(data.value,1)
+        updateGrades(grades)
+      }
     })
   }
 

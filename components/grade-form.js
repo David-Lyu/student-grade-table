@@ -40,7 +40,6 @@ class GradeForm {
       }else {
         this.cacheGradeAdd.push(newObj)
       }
-      console.log(this.cacheEditArray,this.cacheGradeAdd,)
       this.buttonFromFormEle[0].classList.remove("d-none");
       this.buttonFromFormEle[1].classList.add("d-none");
       this.asideElementHeading[0].classList.remove("d-none");
