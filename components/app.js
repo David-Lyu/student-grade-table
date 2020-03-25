@@ -7,8 +7,15 @@ class App {
     this.pageHeader = pageHeader;
     this.gradeForm = gradeForm;
     this.boundCreateGrades = this.createGrade.bind(this);
-    this.boundHandleCreateGradesError = this.handleCreateGradeError.bind(this);
-    this.boundHandleCreateGradesSuccess = this.handleCreateGradeSuccess.bind(this);
+    this.bindHandleCreateGradesError = this.handleCreateGradeError.bind(this);
+    this.bindHandleCreateGradesSuccess = this.handleCreateGradeSuccess.bind(this);
+    this.boundDeleteGrade = this.deleteGrade.bind(this);
+    this.bindHandleDeleteGradeSuccess = this.handleDeleteGradeSuccess.bind(this);
+    this.bindHandleDeleteGradeError = this.handleDeleteGradeError.bind(this);
+    this.boundEditGrade = this.editGrade.bind(this);
+    this.bindHandleEditGradeSuccess = this.handleEditGradeSuccess.bind(this);
+    this.bindHandleEditGradeError = this.handleDeleteGradeError.bind(this);
+    // this.boundCacheGrade = this.cacheGrade.bind(this)
   }
 
   handleGetGradesError(error) {
@@ -17,11 +24,12 @@ class App {
 
   handleGetGradesSuccess(grades) {
     this.gradeTable.updateGrades(grades)
+    this.gradeForm.onSubmit(this.boundCreateGrades,this.boundEditGrade,this.gradeTable)
     var averages = 0;
     for(var averageIndex = 0; averageIndex < grades.length; averageIndex++) {
       averages += grades[averageIndex].grade
     }
-    averages = averages/grades.length;
+    averages = Math.round(averages/grades.length);
     this.pageHeader.updateAverage(averages);
   }
 
@@ -54,8 +62,8 @@ class App {
             "course": course,
             "grade": grade,
           },
-        success: this.boundHandleCreateGradesSuccess,
-        error: this.boundHandleCreateGradesError
+        success: this.bindHandleCreateGradesSuccess,
+        error: this.bindHandleCreateGradesError
       }
     )
   }
@@ -71,5 +79,65 @@ class App {
   start() {
     this.getGrades();
     this.gradeForm.onSubmit(this.boundCreateGrades)
+    this.gradeTable.onOperationClick(this.boundDeleteGrade)
   }
+
+  deleteGrade(id) {
+    $.ajax(
+      {
+        headers: {
+          "X-Access-Token": "PPW7pOdc"
+        },
+        method: "DELETE",
+        url: "https://sgt.lfzprototypes.com/api/grades/"+id,
+        data: "none",
+        success: this.bindHandleDeleteGradeSuccess,
+        error: this.bindHandleDeleteGradeError
+      }
+    )
+  }
+
+  handleDeleteGradeError(error) {
+    console.error(error);
+  }
+
+  handleDeleteGradeSuccess() {
+    this.getGrades();
+  }
+
+  editGrade(id, name, course, grade) {
+    console.log(id, name, course, grade);
+    $.ajax(
+      {
+        headers: {
+          "X-Access-Token": "PPW7pOdc"
+        },
+        method: "PATCH",
+        url: "https://sgt.lfzprototypes.com/api/grades/" + id,
+        data: {
+          "name": name,
+          "course": course,
+          "grade": grade
+        },
+        success: this.bindHandleEditGradeSuccess,
+        error: this.bindHandleEditGradeError
+      }
+    )
+  }
+
+  handleEditGradeError(error) {
+    console.error(error);
+  }
+
+  handleEditGradeSuccess() {
+    this.getGrades();
+  }
+
+  // cacheGrade(grade) {
+  //   var cacheGrade = [];
+  //   for(var storeGradeIndex = 0; storeGradeIndex < grade.length; storeGradeIndex++) {
+  //     cacheGrade[storeGradeIndex] = grade[cacheGrade];
+  //   }
+  //   console.log("cacheGrade")
+  // } For Improve Network Efficiency
 }

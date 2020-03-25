@@ -6,11 +6,12 @@
   <title>SGT Add Grades</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+  <link rel="stylesheet" href="mediaqueries.css">
 </head>
 <body class="container">
   <header class="row">
     <h1 class="col-8">Student Grade Table</h1>
-    <h3 class="col-4">Students Average<span class="badge badge-secondary" id="updateAverages"></span></h3>
+    <h3 class="col-4">Students Average: <span class="badge badge-secondary" id="updateAverages"></span></h3>
   </header>
   <main class ="row">
     <table class="table col-8" id="table">
@@ -19,13 +20,18 @@
           <th scope="col">Student's Name</th>
           <th scope="col">Course</th>
           <th scope="col">Grade</th>
+          <th scope="col">Operations</th>
         </tr>
       </thead>
       <tbody></tbody>
     </table>
 
+    <p class="d-none col-8">No Grades Recorded</p>
+
     <aside class="col-4">
-      <form method="post" action="https://sgt.lfzprototypes.com/api/grades">
+      <h3>Add Student</h3>
+      <h3 class="d-none">Edit Student</h3>
+      <form>
         <label class="form-group row">
           <div class="input-group mb-3 col-2">
             <div class="input-group-prepend">
@@ -70,12 +76,13 @@
               </svg>
             </div>
           </div>
-          <input type="number" name="grade" class="col-sm-10 form-control" id="studentGrade" placeholder="Grade">
+          <input type="number" name="grade" class="col-sm-10 form-control" id="studentGrade" placeholder="Grade" min="0" max="100">
         </label>
 
         <div class="form-group row">
           <button type="submit" class="offset-sm-5 col-sm-3 btn btn-success">Add</button>
-          <button type="reset" class="offset-sm-1 col-sm-3 btn btn-danger">Cancel</button>
+          <button type="submit" class="offset-sm-5 col-sm-3 btn btn-warning d-none">Edit</button>
+          <button type="reset" class="offset-sm-1 col-sm-3 btn btn-outline-secondary">Cancel</button>
         </div>
       </form>
     </aside>

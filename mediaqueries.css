@@ -1,0 +1,82 @@
+/* Portrait */
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+    [class*= col-] {
+      width: 300px;
+    }
+    body > *{
+      width: 300px;
+    }
+    main > table:first-child {
+      width:300px;
+    }
+    header > h3 {
+      display:flex;
+      justify-content: center;
+      text-align: center;
+      flex-wrap: wrap;
+    }
+    aside.col-4 > *{
+      width: 300px;
+    }
+    form > * {
+      width: 300px;
+    }
+}
+
+/* Landscape */
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+    main {
+      display:flex;
+      flex-wrap:nowrap;
+    }
+    table.table.col-8 {
+      width: 200px;
+    }
+    aside.col-4{
+      position:fixed;
+      right: -10px;
+      display:flex;
+      flex-direction: column;
+      align-content: flex-start;
+      margin: 0;
+    }
+    form > *{
+      width: 300px;
+    }
+    form > div >button.offset-sm-5 {
+      margin-left: 10px;
+    }
+    div.input-group {
+      display:none;
+    }
+}
+
+/* Portrait */
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
+  and (orientation: portrait)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    body {
+      height: 1000px;
+    };
+}
+
+/* Landscape */
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
+  and (orientation: landscape)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    body {
+      height: 1000px;
+    };
+}
